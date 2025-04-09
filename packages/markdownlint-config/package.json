@@ -14,5 +14,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TTZZPP/shady-fe-spec/fe-spec.git"
+  },
+  "peerDependencies": {
+    "markdownlint": "^0.37.4"
   }
 }
