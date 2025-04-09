@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.20" />
+    <style>
+      :root {
+        --vp-c-bg: #fff;
+      }
+
+      [data-theme='dark'] {
+        --vp-c-bg: #1b1b1f;
+      }
+
+      html,
+      body {
+        background-color: var(--vp-c-bg);
+      }
+    </style>
+    <script>
+      const useChoice = localStorage.getItem('vuepress-color-scheme')
+      const systemStatus =
+        'matchMedia' in window
+          ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          : false
+
+      if (useChoice === 'light') {
+        document.documentElement.dataset.theme = 'light'
+      } else if (useChoice === 'dark' || systemStatus) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+    <meta name="keywords" content="前端编码规范工程化"><title>SHADY</title><meta name="description" content="前端编码规范工程化">
+    <link rel="preload" href="/fe-spec/assets/style-DT8oQuC2.css" as="style"><link rel="stylesheet" href="/fe-spec/assets/style-DT8oQuC2.css">
+    <link rel="modulepreload" href="/fe-spec/assets/app-Do1_Yx0l.js"><link rel="modulepreload" href="/fe-spec/assets/404.html-CEdBgoym.js">
+    <link rel="prefetch" href="/fe-spec/assets/index.html-CQxW6qe4.js" as="script"><link rel="prefetch" href="/fe-spec/assets/css.html-BXwRJqL-.js" as="script"><link rel="prefetch" href="/fe-spec/assets/html.html-DZIdI9EJ.js" as="script"><link rel="prefetch" href="/fe-spec/assets/javascript.html-DRIXA9fE.js" as="script"><link rel="prefetch" href="/fe-spec/assets/node.html-dJ9_9Dpo.js" as="script"><link rel="prefetch" href="/fe-spec/assets/typescript.html-BlAfY_Fb.js" as="script"><link rel="prefetch" href="/fe-spec/assets/changelog.html-CwsIMRDm.js" as="script"><link rel="prefetch" href="/fe-spec/assets/doc.html-dIBQJDJx.js" as="script"><link rel="prefetch" href="/fe-spec/assets/git.html-Ck3ZxuMI.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="vp-theme-container" vp-container data-v-696fc2b1><main class="page" data-v-696fc2b1><div vp-content data-v-696fc2b1><h1 data-v-696fc2b1>404</h1><blockquote data-v-696fc2b1>That&#39;s a Four-Oh-Four.</blockquote><a class="route-link" href="/fe-spec/" data-v-696fc2b1>Take me home</a></div></main></div><!--[--><!----><!--]--><!--]--></div>
+    <script type="module" src="/fe-spec/assets/app-Do1_Yx0l.js" defer></script>
+  </body>
+</html>
