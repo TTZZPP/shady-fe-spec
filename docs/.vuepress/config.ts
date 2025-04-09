@@ -96,7 +96,7 @@ export default defineUserConfig({
       description: "前端编码规范工程化",
     },
   },
-  base: "/fe-spec/",
+  base: "/shady-fe-spec/",
   plugins: [
     searchPlugin({
       locales: {
