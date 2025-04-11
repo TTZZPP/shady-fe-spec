@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "description": "前端编码规范工程化",
+  "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",

@@ -1,0 +1,42 @@
+/* 变量定义 */
+$primary-color: #07f;
+$spacing-base: 8px;
+
+/* Mixin 定义 */
+@mixin button-base {
+  display: inline-block;
+  padding: $spacing-base $spacing-base * 2;
+  border: 0;
+  border-radius: 4px;
+  background-color: $primary-color;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'Arial', sans-serif;
+  cursor: pointer;
+}
+
+/* 基础按钮样式 */
+.button {
+  @include button-base;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+/* 大尺寸按钮样式 */
+.button-large {
+  $padding-v: $spacing-base * 1.5;
+  $padding-h: $spacing-base * 3;
+  padding: $padding-v $padding-h;
+  font-size: 16px;
+}
+
+/* 响应式样式 */
+@media (width >= 768px) {
+  .button {
+    $padding-v: $spacing-base * 2;
+    $padding-h: $spacing-base * 4;
+    padding: $padding-v $padding-h;
+  }
+}

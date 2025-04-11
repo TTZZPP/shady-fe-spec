@@ -1,0 +1,12 @@
+// 错误：自定义属性缺少 var 函数
+@myColor: #000;
+div {
+  color: @myColor; 
+}
+
+// 错误：媒体查询中无效的特性名称
+@media (invalid - feature: true) { 
+  p {
+    font - size: 14px;
+  }
+}

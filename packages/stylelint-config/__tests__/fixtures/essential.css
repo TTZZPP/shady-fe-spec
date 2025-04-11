@@ -1,0 +1,11 @@
+/* 错误：无效的十六进制颜色值 */
+body {
+  background - color: #gggggg; 
+  /* 错误：声明块中重复属性 */
+  color: black;
+  color: red; 
+  /* 错误：选择器中未知的伪类 */
+  &:unknown - pseudo { 
+    text - decoration: underline;
+  }
+}

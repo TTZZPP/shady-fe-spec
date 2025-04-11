@@ -1,0 +1,18 @@
+// 错误：重复的 @import 规则
+@import 'normalize.css';
+@import 'normalize.css'; 
+
+// 错误：关键帧选择器重复
+@keyframes myAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  0% {
+    transform: translateY(0);
+  }
+}
+
+// 错误：函数中 URL 未加引号
+img {
+  background - image: url(/path/to/image); 
+}
