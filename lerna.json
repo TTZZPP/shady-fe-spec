@@ -6,7 +6,7 @@
   ],
   "command": {
     "publish": {
-      "npmClient": "npm",
+      "npmClient": "pnpm",
       "message": "chore(release): publish %s",
       "registry": "https://registry.npmjs.org"
     }
