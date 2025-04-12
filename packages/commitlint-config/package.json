@@ -9,6 +9,7 @@
     "commitlint",
     "lint"
   ],
+  "type": "module",
   "homepage": "https://github.com/TTZZPP/shady-fe-spec#readme",
   "license": "ISC",
   "repository": {
