@@ -1,0 +1,39 @@
+{
+  "name": "shady-fe-eslint-plugin",
+  "version": "0.0.3",
+  "description": "自定义eslint插件",
+  "author": "TZP",
+  "homepage": "https://github.com/TTZZPP/shady-fe-spec#readme",
+  "license": "ISC",
+  "main": "src/index.js",
+  "keywords": [
+    "shady",
+    "eslint",
+    "eslint-plugin"
+  ],
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TTZZPP/shady-fe-spec.git"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules --trace-deprecation node_modules/jest/bin/jest.js",
+    "prepublishOnly": "npm run test"
+  },
+  "files": [
+    "configs/",
+    "rules/",
+    "README.md"
+  ],
+  "bugs": {
+    "url": "https://github.com/TTZZPP/shady-fe-spec/issues"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.0",
+    "require-all": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.24.0",
+    "jest": "^29.7.0"
+  }
+}
