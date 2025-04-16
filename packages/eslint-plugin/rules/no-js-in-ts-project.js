@@ -5,7 +5,7 @@ import path from 'path';
 const RULE_NAME = 'no-js-in-ts-project';
 
 // 定义检测 .jsx 文件的正则表达式
-const JS_REGEX = /\.jsx$/;
+const JS_REGEX = /\.(js|jsx)$/;
 
 // 定义默认白名单列表，这些文件允许使用 .js 扩展名
 const DEFAULT_WHITE_LIST = [
@@ -71,7 +71,7 @@ export default {
           },
         },
         // 使用定义的消息 ID
-        messageId: 'noJSInTSProject',
+        messageId: 'noJsInTsProject',
         // 传递数据到消息模板
         data: {
           fileName,

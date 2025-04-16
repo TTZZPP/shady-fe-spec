@@ -1,4 +1,4 @@
-import rule from '../rules/no-js-in-ts-project';
+import rule from '../rules/no-secret-info';
 import { RuleTester } from 'eslint';
 
 const ruleTester = new RuleTester();

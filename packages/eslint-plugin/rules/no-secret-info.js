@@ -30,32 +30,30 @@ export default {
     // 如果没有提供危险关键词，使用默认列表
     if (dangerousKeys.length === 0) {
       dangerousKeys = DEFAULT_DANGEROUS_KEYS;
-    } 
+    }
     // 如果启用了自动合并，将默认关键词和用户提供的关键词合并，并去重
     else if (autoMerge) {
-      dangerousKeys = [...new Set(...DEFAULT_DANGEROUS_KEYS, ...dangerousKeys)];
+      dangerousKeys = [...new Set([...DEFAULT_DANGEROUS_KEYS, ...dangerousKeys])];
     }
     // 将危险关键词数组转换为正则表达式，用于匹配变量名
     const reg = new RegExp(dangerousKeys.join('|'));
-
+    
     return {
       // 处理字面量节点
       Literal: function handleRequires(node) {
         if (
           node.value &&
           node.parent &&
-          (
-            // 检查变量声明，例如: const password = "123456"
-            (node.parent.type === 'VariableDeclarator' &&
-              node.parent.id &&
-              node.parent.id.name &&
-              reg.test(node.parent.id.name.toLocaleLowerCase())) ||
+          // 检查变量声明，例如: const password = "123456"
+          ((node.parent.type === 'VariableDeclarator' &&
+            node.parent.id &&
+            node.parent.id.name &&
+            reg.test(node.parent.id.name.toLocaleLowerCase())) ||
             // 检查对象属性，例如: { password: "123456" }
             (node.parent.type === 'Property' &&
               node.parent.key &&
               node.parent.key.name &&
-              reg.test(node.parent.key.name.toLocaleLowerCase()))
-          )
+              reg.test(node.parent.key.name.toLocaleLowerCase())))
         ) {
           // 报告发现的敏感信息
           context.report({
