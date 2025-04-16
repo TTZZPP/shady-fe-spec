@@ -1,6 +1,6 @@
 {
   "name": "shady-fe-eslint-plugin",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "自定义eslint插件",
   "author": "TZP",
   "homepage": "https://github.com/TTZZPP/shady-fe-spec#readme",
