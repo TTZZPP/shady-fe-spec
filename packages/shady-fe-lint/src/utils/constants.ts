@@ -1,9 +1,15 @@
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import path from 'path';
-import fs from 'fs-extra';
+import fsPkg from 'fs-extra';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const { readFileSync } = fsPkg;
 
 // 读取 package.json
 const pkg: Record<string, any> = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../../package.json'), 'utf8')
+  readFileSync(path.join(__dirname, '../../package.json'), 'utf8')
 );
 
 export enum UNICODE {

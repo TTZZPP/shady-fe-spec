@@ -1,11 +1,11 @@
 import path from 'path';
-import glob from 'glob';
-import type { Options as markdownlintOptions } from 'markdownlint/lib/markdownlint.d.mts';
-import { readConfigSync } from 'markdownlint/lib/markdownlint.mjs';
-import markdownLintConfig from 'shady-fe-markdownlint-config';
-import type { ScanOptions, PKG, Config } from '../../types';
+import { glob } from 'glob';
+import * as markdownLint from 'markdownlint';
+import { readConfig } from 'markdownlint/sync';
+import markdownLintConfig from 'shady-fe-markdownlint-config' with { type: 'json' };
+import type { ScanOptions, PKG, Config } from '../../types.js';
 
-type LintOptions = markdownlintOptions & { fix?: boolean };
+type LintOptions = markdownLint.Options & { fix?: boolean };
 
 /**
  * 获取 Markdownlint 配置
@@ -26,7 +26,7 @@ export const getMarkdownlintConfig = (opts: ScanOptions, pkg: PKG, config: Confi
     if (lintConfigFiles.length === 0) {
       lintConfig.config = markdownLintConfig;
     } else {
-      lintConfig.config = readConfigSync(path.resolve(cwd, lintConfigFiles[0]));
+      lintConfig.config = readConfig(path.resolve(cwd, lintConfigFiles[0]));
     }
   }
 

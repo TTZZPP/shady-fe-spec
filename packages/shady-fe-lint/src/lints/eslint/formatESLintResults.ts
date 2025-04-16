@@ -1,5 +1,5 @@
 import { ESLint } from 'eslint';
-import type { ScanResult } from '../../types';
+import type { ScanResult } from '../../types.js';
 
 /**
  * 格式化 ESLint 输出结果

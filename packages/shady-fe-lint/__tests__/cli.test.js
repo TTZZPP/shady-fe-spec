@@ -1,7 +1,14 @@
-const path = require('path');
-const fs = require('fs-extra');
-const execa = require('execa');
-const packageJson = require('../package.json');
+import path from 'path';
+import fsPkg from 'fs-extra';
+import * as fs from 'fs-extra/esm';
+import { execa } from 'execa';
+import packageJson from '../package.json' with { type: 'json' };
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const { readFileSync } = fsPkg;
 
 const cli = (args, options) => {
   return execa('node', [path.resolve(__dirname, '../lib/cli.js'), ...args], options);
@@ -15,8 +22,8 @@ test('--version should output right version', async () => {
 describe(`'fix' command`, () => {
   const dir = path.resolve(__dirname, './fixtures/autofix');
   const outputFilePath = path.resolve(dir, './temp/temp.js');
-  const errorFileContent = fs.readFileSync(path.resolve(dir, './semi-error.js'), 'utf8');
-  const expectedFileContent = fs.readFileSync(path.resolve(dir, './semi-expected.js'), 'utf8');
+  const errorFileContent = readFileSync(path.resolve(dir, './semi-error.js'), 'utf8');
+  const expectedFileContent = readFileSync(path.resolve(dir, './semi-expected.js'), 'utf8');
 
   beforeEach(() => {
     fs.outputFileSync(outputFilePath, errorFileContent, 'utf8');
@@ -26,7 +33,7 @@ describe(`'fix' command`, () => {
     await cli(['fix'], {
       cwd: path.dirname(`${dir}/result`),
     });
-    expect(fs.readFileSync(outputFilePath, 'utf8')).toEqual(expectedFileContent);
+    expect(readFileSync(outputFilePath, 'utf8')).toEqual(expectedFileContent);
   });
 
   afterEach(() => {

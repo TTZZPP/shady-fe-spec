@@ -1,10 +1,10 @@
 import fs from 'fs-extra';
-import glob from 'glob';
+import { glob } from 'glob';
 import path from 'path';
 import { LinterOptions } from 'stylelint';
-import type { PKG, ScanOptions } from '../../types';
-import { STYLELINT_IGNORE_PATTERN } from '../../utils/constants';
-import { Config } from '../../types';
+import type { PKG, ScanOptions } from '../../types.js';
+import { STYLELINT_IGNORE_PATTERN } from '../../utils/constants.js';
+import { Config } from '../../types.js';
 
 /**
  * 获取 Stylelint 配置

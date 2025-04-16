@@ -1,5 +1,5 @@
 declare module 'shady-fe-markdownlint-config' {
-  import type { Configuration } from 'markdownlint/lib/markdownlint.d.mts';
+  import { Configuration } from 'markdownlint';
   const config: Configuration;
   export default config;
 }

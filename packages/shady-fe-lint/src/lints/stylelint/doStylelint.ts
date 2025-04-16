@@ -1,10 +1,10 @@
 import fg from 'fast-glob';
 import { extname, join } from 'path';
 import stylelint from 'stylelint';
-import { PKG, ScanOptions } from '../../types';
-import { STYLELINT_FILE_EXT, STYLELINT_IGNORE_PATTERN } from '../../utils/constants';
-import { getStylelintConfig } from './getStylelintConfig';
-import { formatStylelintResults } from './formatStylelintResults';
+import { PKG, ScanOptions } from '../../types.js';
+import { STYLELINT_FILE_EXT, STYLELINT_IGNORE_PATTERN } from '../../utils/constants.js';
+import { getStylelintConfig } from './getStylelintConfig.js';
+import { formatStylelintResults } from './formatStylelintResults.js';
 
 export interface DoStylelintOptions extends ScanOptions {
   pkg: PKG;

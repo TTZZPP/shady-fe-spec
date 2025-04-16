@@ -1,9 +1,6 @@
 import { ESLint } from 'eslint';
 import stylelint from 'stylelint';
-import type {
-  Options as markdownlintOptions,
-  LintResults as markdownlintLintResults,
-} from 'markdownlint/lib/markdownlint.d.mts';
+import * as markdownlint from 'markdownlint';
 
 export interface PKG {
   eslintConfig?: any;
@@ -29,7 +26,7 @@ export interface Config {
   // stylelint 配置项
   stylelintOptions?: stylelint.LinterOptions;
   // markdownlint 配置项
-  markdownlintOptions?: markdownlintOptions;
+  markdownlintOptions?: markdownlint.Options;
 }
 
 export interface InitOptions {
@@ -99,11 +96,11 @@ export interface IGetLintConfig {
 
   (options: ScanOptions, pkg: PKG, config: Config): stylelint.LinterOptions;
 
-  (options: ScanOptions, pkg: PKG, config: Config): markdownlintOptions;
+  (options: ScanOptions, pkg: PKG, config: Config): markdownlint.Options;
 }
 
 export interface IFormatResults {
   (results: ESLint.LintResult[], quiet: boolean): ScanResult[];
   (results: stylelint.LintResult[], quiet: boolean): ScanResult[];
-  (results: markdownlintLintResults, quiet: boolean): ScanResult[];
+  (results: markdownlint.LintResults, quiet: boolean): ScanResult[];
 }

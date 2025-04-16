@@ -1,1 +1,1 @@
-export * from './doPrettier';
+export * from './doPrettier.js';

@@ -1,13 +1,15 @@
 // 保持导入部分不变
 import fg from 'fast-glob';
-import { readFile, writeFile } from 'fs-extra';
+import fsPkg from 'fs-extra';
 import { extname, join } from 'path';
 import prettier from 'prettier';
-import { ScanOptions } from '../../types';
-import { PRETTIER_FILE_EXT, PRETTIER_IGNORE_PATTERN } from '../../utils/constants';
+import { ScanOptions } from '../../types.js';
+import { PRETTIER_FILE_EXT, PRETTIER_IGNORE_PATTERN } from '../../utils/constants.js';
 
 // 定义 Prettier 选项接口，继承自基础扫描选项
 export interface DoPrettierOptions extends ScanOptions {}
+
+const { readFile, writeFile } = fsPkg;
 
 /**
  * 执行 Prettier 格式化
@@ -15,7 +17,7 @@ export interface DoPrettierOptions extends ScanOptions {}
  */
 export async function doPrettier(options: DoPrettierOptions) {
   let files: string[] = [];
-  
+
   // 如果指定了具体文件，则过滤出支持的文件类型
   if (options.files) {
     files = options.files.filter((name) => PRETTIER_FILE_EXT.includes(extname(name)));
@@ -32,7 +34,7 @@ export async function doPrettier(options: DoPrettierOptions) {
       ignore: PRETTIER_IGNORE_PATTERN, // 排除不需要处理的文件
     });
   }
-  
+
   // 并行处理所有文件的格式化
   await Promise.all(files.map(formatFile));
 }
@@ -44,13 +46,13 @@ export async function doPrettier(options: DoPrettierOptions) {
 async function formatFile(filepath: string) {
   // 读取文件内容
   const text = await readFile(filepath, 'utf8');
-  
+
   // 获取该文件的 Prettier 配置
   const options = await prettier.resolveConfig(filepath);
-  
+
   // 使用 Prettier 格式化内容
   const formatted = await prettier.format(text, { ...options, filepath });
-  
+
   // 将格式化后的内容写回文件
   await writeFile(filepath, formatted, 'utf8');
 }

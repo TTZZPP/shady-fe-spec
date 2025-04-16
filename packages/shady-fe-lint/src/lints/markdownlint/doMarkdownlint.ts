@@ -1,18 +1,21 @@
 import fg from 'fast-glob';
-import { readFile, writeFile } from 'fs-extra';
-import type { LintError } from 'markdownlint/lib/markdownlint.d.mts';
-import { lintPromise } from 'markdownlint/lib/markdownlint.mjs';
+import fsPkg from 'fs-extra';
+import { LintError } from 'markdownlint';
+// import { lintPromise } from 'markdownlint/lib/markdownlint.mjs';
+import { lint as lintPromise } from 'markdownlint/promise';
 import markdownlintRuleHelpers from 'markdownlint-rule-helpers';
 import { extname, join } from 'path';
-import { Config, PKG, ScanOptions } from '../../types';
-import { MARKDOWN_LINT_FILE_EXT, MARKDOWN_LINT_IGNORE_PATTERN } from '../../utils/constants';
-import { formatMarkdownlintResults } from './formatMarkdownlintResults';
-import { getMarkdownlintConfig } from './getMarkdownlintConfig';
+import { Config, PKG, ScanOptions } from '../../types.js';
+import { MARKDOWN_LINT_FILE_EXT, MARKDOWN_LINT_IGNORE_PATTERN } from '../../utils/constants.js';
+import { formatMarkdownlintResults } from './formatMarkdownlintResults.js';
+import { getMarkdownlintConfig } from './getMarkdownlintConfig.js';
 
 export interface DoMarkdownlintOptions extends ScanOptions {
   pkg: PKG;
   config?: Config;
 }
+
+const { readFile, writeFile } = fsPkg;
 
 export const doMarkdownlint = async (options: DoMarkdownlintOptions) => {
   let files: string[];

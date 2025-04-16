@@ -1,3 +1,3 @@
-export * from './getMarkdownlintConfig';
-export * from './formatMarkdownlintResults';
-export * from './doMarkdownlint';
+export * from './getMarkdownlintConfig.js';
+export * from './formatMarkdownlintResults.js';
+export * from './doMarkdownlint.js';

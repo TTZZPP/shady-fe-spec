@@ -1,13 +1,18 @@
 import path from 'path';
 import fs from 'fs-extra';
 import _ from 'lodash';
-import glob from 'glob';
+import { glob } from 'glob';
 import ejs from 'ejs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import {
   STYLELINT_FILE_EXT,
   STYLELINT_IGNORE_PATTERN,
   MARKDOWN_LINT_IGNORE_PATTERN,
-} from './constants';
+} from './constants.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * 合并 VSCode 配置文件
@@ -34,7 +39,7 @@ const mergeVSCodeConfig = (filepath: string, content: string) => {
         }
       }),
       null,
-      2  // 缩进两个空格
+      2 // 缩进两个空格
     );
   } catch (error) {
     // 如果解析过程出错，返回空字符串
@@ -62,10 +67,10 @@ export default (cwd: string, data: Record<string, any>, vscode?: boolean) => {
 
     // 渲染模板内容，传入样式和 Markdown 相关的配置
     let content = ejs.render(fs.readFileSync(path.resolve(templatePath, name), 'utf8'), {
-      stylelintExt: STYLELINT_FILE_EXT,          // Stylelint 要处理的文件扩展名
+      stylelintExt: STYLELINT_FILE_EXT, // Stylelint 要处理的文件扩展名
       stylelintIgnores: STYLELINT_IGNORE_PATTERN, // Stylelint 忽略的文件模式
       markdownLintIgnores: MARKDOWN_LINT_IGNORE_PATTERN, // Markdownlint 忽略的文件模式
-      ...data,  // 其他模板数据
+      ...data, // 其他模板数据
     });
 
     // 如果是 VSCode 配置文件，需要与现有配置合并

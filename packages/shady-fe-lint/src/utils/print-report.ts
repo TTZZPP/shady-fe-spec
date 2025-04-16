@@ -3,8 +3,8 @@ import table from 'text-table';
 import terminalLink from 'terminal-link';
 import isDocker from 'is-docker';
 import stripAnsi from 'strip-ansi';
-import { PKG_NAME, UNICODE } from './constants';
-import type { ScanResult } from '../types';
+import { PKG_NAME, UNICODE } from './constants.js';
+import type { ScanResult } from '../types.js';
 
 /**
  * 在控制台打印扫描报告

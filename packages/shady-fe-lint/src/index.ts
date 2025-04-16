@@ -1,9 +1,9 @@
 import ora from 'ora';
-import scanAction from './actions/scan';
-import initAction from './actions/init';
-import { PKG_NAME } from './utils/constants';
-import printReport from './utils/print-report';
-import type { InitOptions, ScanOptions } from './types';
+import scanAction from './actions/scan.js';
+import initAction from './actions/init.js';
+import { PKG_NAME } from './utils/constants.js';
+import printReport from './utils/print-report.js';
+import type { InitOptions, ScanOptions } from './types.js';
 
 type IInitOptions = Omit<InitOptions, 'checkVersionUpdate'>;
 

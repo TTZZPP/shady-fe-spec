@@ -1,3 +1,3 @@
-export * from './getStylelintConfig';
-export * from './formatStylelintResults';
-export * from './doStylelint';
+export * from './getStylelintConfig.js';
+export * from './formatStylelintResults.js';
+export * from './doStylelint.js';

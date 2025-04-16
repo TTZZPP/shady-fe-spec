@@ -1,10 +1,12 @@
 import path from 'path';
 import fs from 'fs-extra';
-import glob from 'glob';
+import { glob } from 'glob';
 import inquirer from 'inquirer';
-import log from './log';
-import { PKG_NAME } from './constants';
-import type { PKG } from '../types';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import log from './log.js';
+import { PKG_NAME } from './constants.js';
+import type { PKG } from '../types.js';
 
 // 需要精确移除的依赖包名列表
 const packageNamesToRemove = [
@@ -30,27 +32,32 @@ const packagePrefixesToRemove = [
   'commitlint-',
 ];
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 /**
  * 检查项目中可能存在的无用配置文件
  * @param cwd - 当前工作目录
  * @returns 返回需要删除的配置文件列表
  */
 const checkUselessConfig = (cwd: string): string[] => {
-  return []
-    // 搜索 ESLint 相关配置文件
-    .concat(glob.sync('.eslintrc?(.@(yaml|yml|json))', { cwd }))
-    // 搜索 Stylelint 相关配置文件
-    .concat(glob.sync('.stylelintrc?(.@(yaml|yml|json))', { cwd }))
-    // 搜索 Markdownlint 相关配置文件
-    .concat(glob.sync('.markdownlint@(rc|.@(yaml|yml|jsonc))', { cwd }))
-    // 搜索 Prettier 相关配置文件
-    .concat(
-      glob.sync('.prettierrc?(.@(cjs|config.js|config.cjs|yaml|yml|json|json5|toml))', { cwd })
-    )
-    // 搜索 TSLint 相关配置文件
-    .concat(glob.sync('tslint.@(yaml|yml|json)', { cwd }))
-    // 搜索其他自定义配置文件
-    .concat(glob.sync('.kylerc?(.@(yaml|yml|json))', { cwd }));
+  return (
+    []
+      // 搜索 ESLint 相关配置文件
+      .concat(glob.sync('.eslintrc?(.@(yaml|yml|json))', { cwd }))
+      // 搜索 Stylelint 相关配置文件
+      .concat(glob.sync('.stylelintrc?(.@(yaml|yml|json))', { cwd }))
+      // 搜索 Markdownlint 相关配置文件
+      .concat(glob.sync('.markdownlint@(rc|.@(yaml|yml|jsonc))', { cwd }))
+      // 搜索 Prettier 相关配置文件
+      .concat(
+        glob.sync('.prettierrc?(.@(cjs|config.js|config.cjs|yaml|yml|json|json5|toml))', { cwd })
+      )
+      // 搜索 TSLint 相关配置文件
+      .concat(glob.sync('tslint.@(yaml|yml|json)', { cwd }))
+      // 搜索其他自定义配置文件
+      .concat(glob.sync('.kylerc?(.@(yaml|yml|json))', { cwd }))
+  );
 };
 
 /**
@@ -59,13 +66,15 @@ const checkUselessConfig = (cwd: string): string[] => {
  * @returns 返回需要重写的配置文件列表
  */
 const checkRewriteConfig = (cwd: string) => {
-  return glob
-    // 搜索 config 目录下的所有 ejs 模板文件
-    .sync('**/*.ejs', { cwd: path.resolve(__dirname, '../config') })
-    // 将模板文件名转换为实际配置文件名
-    .map((name) => name.replace(/^_/, '.').replace(/\.ejs$/, ''))
-    // 过滤出已存在的配置文件
-    .filter((filename) => fs.existsSync(path.resolve(cwd, filename)));
+  return (
+    glob
+      // 搜索 config 目录下的所有 ejs 模板文件
+      .sync('**/*.ejs', { cwd: path.resolve(__dirname, '../config') })
+      // 将模板文件名转换为实际配置文件名
+      .map((name) => name.replace(/^_/, '.').replace(/\.ejs$/, ''))
+      // 过滤出已存在的配置文件
+      .filter((filename) => fs.existsSync(path.resolve(cwd, filename)))
+  );
 };
 
 /**
@@ -78,7 +87,7 @@ export default async (cwd: string, rewirteConfig?: boolean) => {
   // 读取项目的 package.json
   const pkgPath = path.resolve(cwd, 'package.json');
   const pkg: PKG = fs.readJSONSync(pkgPath);
-  
+
   // 获取所有依赖包名列表
   const dependencies = [].concat(
     Object.keys(pkg.dependencies || {}),
@@ -143,13 +152,13 @@ export default async (cwd: string, rewirteConfig?: boolean) => {
   delete pkg.eslintConfig;
   delete pkg.eslintIgnore;
   delete pkg.stylelint;
-  
+
   // 删除冲突的依赖
   for (const name of willRemovePackage) {
     delete (pkg.dependencies || {})[name];
     delete (pkg.devDependencies || {})[name];
   }
-  
+
   // 写入更新后的 package.json
   fs.writeFileSync(path.resolve(cwd, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8');
 

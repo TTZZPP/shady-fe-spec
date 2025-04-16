@@ -1,5 +1,5 @@
-import { LintResults } from 'markdownlint/lib/markdownlint.mjs';
-import type { ScanResult } from '../../types';
+import { LintResults } from 'markdownlint';
+import type { ScanResult } from '../../types.js';
 
 /**
  * 格式化 markdownlint 输出结果

@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { PKG_NAME, UNICODE } from '../utils/constants';
+import { PKG_NAME, UNICODE } from '../utils/constants.js';
 
 const { green, blue, yellow, red } = chalk;
 

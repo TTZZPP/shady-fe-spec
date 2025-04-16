@@ -1,8 +1,8 @@
 import { execSync } from 'child_process';
 import ora from 'ora';
-import log from '../utils/log';
-import npmType from '../utils/npm-type';
-import { PKG_NAME, PKG_VERSION } from '../utils/constants';
+import log from '../utils/log.js';
+import npmType from '../utils/npm-type.js';
+import { PKG_NAME, PKG_VERSION } from '../utils/constants.js';
 
 // 检查最新版本
 const checkLatestVersion = async (): Promise<string | null> => {

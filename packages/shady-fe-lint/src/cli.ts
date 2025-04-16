@@ -2,19 +2,19 @@
 import path from 'path';
 import fs from 'fs-extra';
 import ora from 'ora';
-import glob from 'glob';
+import { glob } from 'glob';
 import { program } from 'commander';
 import spawn from 'cross-spawn';
 import { execSync } from 'child_process';
-import init from './actions/init';
-import scan from './actions/scan';
-import update from './actions/update';
-import log from './utils/log';
-import printReport from './utils/print-report';
-import npmType from './utils/npm-type';
-import { getCommitFiles, getAmendFiles } from './utils/git';
-import generateTemplate from './utils/generate-template';
-import { PKG_NAME, PKG_VERSION } from './utils/constants';
+import init from './actions/init.js';
+import scan from './actions/scan.js';
+import update from './actions/update.js';
+import log from './utils/log.js';
+import printReport from './utils/print-report.js';
+import npmType from './utils/npm-type.js';
+import { getCommitFiles, getAmendFiles } from './utils/git.js';
+import generateTemplate from './utils/generate-template.js';
+import { PKG_NAME, PKG_VERSION } from './utils/constants.js';
 
 const cwd = process.cwd();
 

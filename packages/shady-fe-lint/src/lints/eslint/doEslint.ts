@@ -1,10 +1,10 @@
 import { ESLint } from 'eslint';
 import fg from 'fast-glob';
 import { extname, join } from 'path';
-import { Config, PKG, ScanOptions } from '../../types';
-import { ESLINT_FILE_EXT, ESLINT_IGNORE_PATTERN } from '../../utils/constants';
-import { formatESLintResults } from './formatESLintResults';
-import { getESLintConfig } from './getESLintConfig';
+import { Config, PKG, ScanOptions } from '../../types.js';
+import { ESLINT_FILE_EXT, ESLINT_IGNORE_PATTERN } from '../../utils/constants.js';
+import { formatESLintResults } from './formatESLintResults.js';
+import { getESLintConfig } from './getESLintConfig.js';
 
 export interface DoESLintOptions extends ScanOptions {
   pkg: PKG;

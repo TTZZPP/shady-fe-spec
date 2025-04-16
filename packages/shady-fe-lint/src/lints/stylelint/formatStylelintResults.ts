@@ -1,6 +1,6 @@
 import { LintResult } from 'stylelint';
-import type { ScanResult } from '../../types';
-import { getStylelintRuleDocUrl } from './getStylelintDocUrl';
+import type { ScanResult } from '../../types.js';
+import { getStylelintRuleDocUrl } from './getStylelintDocUrl.js';
 
 /**
  * 格式化 Stylelint 输出结果

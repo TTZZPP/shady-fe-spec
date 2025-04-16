@@ -1,8 +1,8 @@
 import { ESLint } from 'eslint';
-import glob from 'glob';
-import type { Config, PKG, ScanOptions } from '../../types';
-import { ESLINT_FILE_EXT } from '../../utils/constants';
-import { getESLintConfigType } from './getESLintConfigType';
+import { glob } from 'glob';
+import type { Config, PKG, ScanOptions } from '../../types.js';
+import { ESLINT_FILE_EXT } from '../../utils/constants.js';
+import { getESLintConfigType } from './getESLintConfigType.js';
 
 /**
  * 获取 ESLint 配置

@@ -1,5 +1,5 @@
-import glob from 'glob';
-import type { PKG } from '../../types';
+import { glob } from 'glob';
+import type { PKG } from '../../types.js';
 
 /**
  * 获取 ESLint 配置类型

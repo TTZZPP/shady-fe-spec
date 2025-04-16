@@ -4,11 +4,12 @@
   "description": "前端编码规范工程化脚手架",
   "bin": "./lib/cli.js",
   "main": "./lib/index.js",
+  "type": "module",
   "scripts": {
     "dev": "npm run copyfiles && tsc -w",
     "build": "rd /s /q lib && npm run copyfiles && tsc",
     "copyfiles": "copyfiles -a -u 1 \"src/config/**\" lib",
-    "test": "npm run build && jest",
+    "test": "npm run build && node --experimental-vm-modules --trace-deprecation node_modules/jest/bin/jest.js",
     "coverage": "nyc jest --silent --forceExit",
     "prepublishOnly": "npm run test"
   },
@@ -91,5 +92,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TTZZPP/shady-fe-spec.git"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/__tests__/*.test.js"
+    ]
   }
 }

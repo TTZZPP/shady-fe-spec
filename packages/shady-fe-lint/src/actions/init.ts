@@ -1,14 +1,14 @@
 import path from 'path';
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
-import { PKG_NAME, PROJECT_TYPES } from '../utils/constants';
-import { InitOptions, PKG } from '../types';
-import update from './update';
-import conflictResolve from '../utils/conflict-resolve';
-import log from '../utils/log';
-import npmType from '../utils/npm-type';
 import crossSpawn from 'cross-spawn';
-import generateTemplate from '../utils/generate-template';
+import { PKG_NAME, PROJECT_TYPES } from '../utils/constants.js';
+import { InitOptions, PKG } from '../types.js';
+import update from './update.js';
+import conflictResolve from '../utils/conflict-resolve.js';
+import log from '../utils/log.js';
+import npmType from '../utils/npm-type.js';
+import generateTemplate from '../utils/generate-template.js';
 
 let step = 0;
 

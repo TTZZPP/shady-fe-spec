@@ -1,8 +1,15 @@
-const path = require('path');
-const fs = require('fs-extra');
-const encodeFeLint = require('../lib/index');
+import path from 'path';
+import fsPkg from 'fs-extra';
+import * as fs from 'fs-extra/esm';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import * as shadyFeLint from '../lib/index.js';
 
-const { init } = encodeFeLint;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const { init } = shadyFeLint;
+const { renameSync } = fsPkg;
 
 describe('init', () => {
   const templatePath = path.resolve(__dirname, './fixtures/template/init');
@@ -10,7 +17,7 @@ describe('init', () => {
 
   beforeEach(() => {
     fs.copySync(templatePath, outputPath);
-    fs.renameSync(`${outputPath}/_vscode`, `${outputPath}/.vscode`);
+    renameSync(`${outputPath}/_vscode`, `${outputPath}/.vscode`);
   });
 
   test('node api init should work as expected', async () => {
@@ -23,12 +30,14 @@ describe('init', () => {
       enablePrettier: true,
     });
 
-    const pkg = require(`${outputPath}/package.json`);
-    const settings = require(`${outputPath}/.vscode/settings.json`);
+    const pkg = await import(`${outputPath}/package.json`, { assert: { type: 'json' } });
+    const settings = await import(`${outputPath}/.vscode/settings.json`, {
+      assert: { type: 'json' },
+    });
 
-    expect(settings['editor.defaultFormatter']).toBe('esbenp.prettier-vscode');
-    expect(settings['eslint.validate'].includes('233')).toBeTruthy();
-    expect(settings.test).toBeTruthy();
+    expect(settings.default['editor.defaultFormatter']).toBe('esbenp.prettier-vscode');
+    expect(settings.default['eslint.validate'].includes('233')).toBeTruthy();
+    expect(settings.default.test).toBeTruthy();
   });
 
   afterEach(() => {
