@@ -71,6 +71,27 @@ program
 
     const checking = ora();
     checking.start(`执行 ${PKG_NAME} 代码检查`);
+
+    const { results, errorCount, warningCount, runErrors } = await scan({
+      cwd,
+      fix: false,
+      include: cmd.include || cwd,
+      quiet: Boolean(cmd.quiet),
+      outputReport: Boolean(cmd.outputReport),
+      ignore: cmd.ignore, // 对应 --no-ignore
+    });
+    let type = 'succeed';
+    if (runErrors.length > 0 || errorCount > 0) {
+      type = 'fail';
+    } else if (warningCount > 0) {
+      type = 'warn';
+    }
+
+    checking[type]();
+    if (results.length > 0) printReport(results, false);
+
+    // 输出 lint 运行错误
+    runErrors.forEach((e) => console.log(e));
   });
 
 program
