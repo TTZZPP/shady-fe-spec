@@ -7,13 +7,19 @@ import { PKG_NAME } from '../utils/constants.js';
 export default async (options: ScanOptions): Promise<ScanReport> => {
   const { cwd, fix, outputReport, config: scanConfig } = options;
 
-  const readConfigFile = (pth: string): any => {
+  const readConfigFile = async (pth: string): Promise<any> => {
     const localPath = path.resolve(cwd, pth);
-    return fs.existsSync(localPath) ? require(localPath) : {};
+    if (!fs.existsSync(localPath)) return {};
+    try {
+      const module = await import(localPath);
+      return module.default || module;
+    } catch {
+      return {};
+    }
   };
 
-  const pkg: PKG = readConfigFile('package.json');
-  const config: Config = scanConfig || readConfigFile(`${PKG_NAME}.config.js`);
+  const pkg: PKG = await readConfigFile('package.json');
+  const config: Config = scanConfig || await readConfigFile(`${PKG_NAME}.config.js`);
   const runErrors: Error[] = [];
   let results: ScanResult[] = [];
 

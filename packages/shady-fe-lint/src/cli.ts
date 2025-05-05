@@ -50,7 +50,8 @@ program
   .action(async (cmd) => {
     if (cmd.vscode) {
       const configPath = path.resolve(cwd, `${PKG_NAME}.config.js`);
-      generateTemplate(cwd, require(configPath), true);
+      const config = await import(configPath);
+      generateTemplate(cwd, config.default || config, true);
     } else {
       await init({
         cwd,
