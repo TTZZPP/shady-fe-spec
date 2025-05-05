@@ -45,6 +45,7 @@ const checkUselessConfig = (cwd: string): string[] => {
     []
       // 搜索 ESLint 相关配置文件
       .concat(glob.sync('.eslintrc?(.@(yaml|yml|json))', { cwd }))
+      .concat(glob.sync('eslintrc.config?(.@(yaml|yml|json))', { cwd }))
       // 搜索 Stylelint 相关配置文件
       .concat(glob.sync('.stylelintrc?(.@(yaml|yml|json))', { cwd }))
       // 搜索 Markdownlint 相关配置文件
