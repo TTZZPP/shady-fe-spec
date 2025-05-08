@@ -72,8 +72,8 @@ const chooseEnablePrettier = async (): Promise<boolean> => {
 export default async (options: InitOptions) => {
   const cwd = options.cwd || process.cwd();
   const isTest = process.env.NODE_ENV === 'test';
-  const checkVersionUpdate = options.checkVersionUpdate || true;
-  const disableNpmInstall = options.disableNpmInstall || true;
+  const checkVersionUpdate = options.checkVersionUpdate || false;
+  const disableNpmInstall = options.disableNpmInstall || false;
   const config: Record<string, any> = {};
   const pkgPath = path.resolve(cwd, 'package.json');
   let pkg: PKG = fs.readJSONSync(pkgPath);
